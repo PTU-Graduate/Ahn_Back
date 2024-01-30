@@ -8,13 +8,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class LeeApplication extends SpringBootServletInitializer {
 
-	@Override // 구성 방법 재정의
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(LeeApplication.class);
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(LeeApplication.class, args);
+	}
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(LeeApplication.class);
 	}
 
 }
