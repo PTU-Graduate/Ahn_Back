@@ -21,7 +21,7 @@ public class HelloController {
 
 	@GetMapping("/test")
 	public String test() {
-		return "너는 이종태";
+		return "너는이종태다 키";
 	}
 
 	@GetMapping("/DbTest")
