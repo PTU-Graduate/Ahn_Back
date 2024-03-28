@@ -1,4 +1,4 @@
-package com.example.Lee;
+package com.example.Lee.service;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseService {
 
+	// JdbcTemplate 주입
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
@@ -19,8 +20,10 @@ public class DatabaseService {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	// 애플리케이션 시작 시 실행되는 메서드
 	@EventListener(ApplicationReadyEvent.class)
 	public void initialize() {
+		// 데이터베이스 연결 여부 확인
 		boolean isConnected = isDatabaseConnected();
 		if (isConnected) {
 			System.out.println("데이터베이스 연결됨");
@@ -29,22 +32,25 @@ public class DatabaseService {
 		}
 	}
 
+	// 특정 테이블의 모든 데이터를 가져오는 메서드
 	public List<Map<String, Object>> getAllDataFromTable(String tableName) {
-		// 테이블의 모든 데이터를 가져오는 쿼리 작성
+		// SQL 쿼리 생성
 		String sql = "SELECT * FROM " + tableName;
 
-		// JdbcTemplate을 사용하여 쿼리 실행
+		// JdbcTemplate을 사용하여 쿼리 실행하여 데이터 조회
 		List<Map<String, Object>> data = jdbcTemplate.queryForList(sql);
 
 		return data;
 	}
 
+	// 데이터베이스 연결 여부 확인하는 메서드
 	private boolean isDatabaseConnected() {
 		try {
+			// 임의의 쿼리 실행하여 데이터베이스 연결 상태 확인
 			jdbcTemplate.execute("SELECT 1");
-			return true;
+			return true; // 연결 성공
 		} catch (Exception e) {
-			return false;
+			return false; // 연결 실패
 		}
 	}
 }
