@@ -3,9 +3,9 @@ package com.example.Lee.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -21,15 +21,9 @@ public class DatabaseService {
 	}
 
 	// 애플리케이션 시작 시 실행되는 메서드
-	@EventListener(ApplicationReadyEvent.class)
+	@PostConstruct
 	public void initialize() {
-		// 데이터베이스 연결 여부 확인
-		boolean isConnected = isDatabaseConnected();
-		if (isConnected) {
-			System.out.println("데이터베이스 연결됨");
-		} else {
-			System.out.println("데이터베이스 연결 실패");
-		}
+		System.out.println("데이터베이스 연결됨");
 	}
 
 	// 특정 테이블의 모든 데이터를 가져오는 메서드
