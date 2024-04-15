@@ -1,39 +1,37 @@
 package com.example.Lee.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.Lee.dao.LoginDao;
+import com.example.Lee.model.LoginRsltModel;
 import com.example.Lee.model.UserModel;
 
-//이 클래스를 서비스로 지정합니다.
 @Service
 public class LoginService {
 
-	private final LoginDao loginDao; // LoginDao 의존성 주입을 위한 필드
+	private final LoginDao loginDao;
 
-	// 생성자를 통해 LoginDao 의존성을 주입받습니다.
-	@Autowired
 	public LoginService(LoginDao loginDao) {
 		this.loginDao = loginDao;
 	}
 
-	// 사용자 인증을 수행하는 메서드입니다.
-	public String authenticateUser(String membId, String pass) {
-		// 사용자 정보를 데이터베이스에서 조회합니다.
+	public ResponseEntity<LoginRsltModel> authenticateUser(String membId, String pass) {
+		// 데이터베이스에서 해당 MEMB_ID에 대한 정보 조회
 		UserModel user = loginDao.findByMembId(membId);
 
-		// 사용자가 존재하지 않는 경우
+		// MEMB_ID가 존재하지 않는 경우
 		if (user == null) {
-			return "02"; // 아이디 오류 메시지 반환
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginRsltModel("02"));
 		}
 
-		// 비밀번호가 일치하지 않는 경우
+		// MEMB_ID에 해당하는 PASS와 비교하여 인증 수행
 		if (!user.getPass().equals(pass)) {
-			return "01"; // 비밀번호 오류 메시지 반환
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginRsltModel("01"));
 		}
 
-		// 모든 조건을 만족하는 경우
-		return "00"; // 성공 메시지 반환
+		// 인증 성공
+		return ResponseEntity.ok(new LoginRsltModel("00"));
 	}
 }

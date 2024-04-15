@@ -3,17 +3,17 @@ package com.example.Lee.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Lee.model.LoginRsltModel;
 import com.example.Lee.service.LoginService;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.POST })
 public class LoginController {
+
 	private final LoginService loginService;
 
 	@Autowired
@@ -22,7 +22,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/Login")
-	public String Login(@RequestBody Map<String, String> requestData) {
+	public ResponseEntity<LoginRsltModel> login(@RequestBody Map<String, String> requestData) {
 		String loginId = requestData.get("MEMB_ID");
 		String loginPass = requestData.get("PASS");
 
@@ -35,6 +35,7 @@ public class LoginController {
 			throw new IllegalArgumentException("LOGIN_PASS를 제대로 입력하세요.");
 		}
 
+		// authenticateUser 메서드 호출 및 반환값 그대로 반환
 		return loginService.authenticateUser(loginId, loginPass);
 	}
 }
