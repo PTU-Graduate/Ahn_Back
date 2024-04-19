@@ -1,6 +1,5 @@
 package com.example.Lee.service;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +22,12 @@ public class LoginService {
 
 		// MEMB_ID가 존재하지 않는 경우
 		if (user == null) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginRsltModel("02"));
+			return ResponseEntity.ok(new LoginRsltModel("02"));
 		}
 
 		// MEMB_ID에 해당하는 PASS와 비교하여 인증 수행
 		if (!user.getPass().equals(pass)) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginRsltModel("01"));
+			return ResponseEntity.ok(new LoginRsltModel("01"));
 		}
 
 		// 인증 성공
