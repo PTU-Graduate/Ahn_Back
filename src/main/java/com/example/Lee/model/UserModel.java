@@ -10,8 +10,11 @@ public class UserModel {
 	// @Id 어노테이션을 사용하여 membId 필드를 기본 키로 지정합니다.
 	@Id
 	private String membId; // membId를 기본 키로 사용
-
 	private String pass; // 패스워드를 저장하는 필드입니다.
+	private String stdNum; // 학번
+	private String stdDepCd; // 학과 코드
+	private String name; // 이름
+	private String grade; // 학년
 
 	// 생성자, 게터, 세터 등의 필요한 메서드는 생략합니다.
 
@@ -20,18 +23,48 @@ public class UserModel {
 		return membId;
 	}
 
+	public String getPass() {
+		return pass;
+	}
+
+	public String getStdNum() {
+		return stdNum;
+	}
+
+	public String getStdDepCd() {
+		return stdDepCd;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
 	// membId 필드의 Setter 메서드입니다.
 	public void setMembId(String membId) {
 		this.membId = membId;
 	}
 
-	// pass 필드의 Getter 메서드입니다.
-	public String getPass() {
-		return pass;
-	}
-
-	// pass 필드의 Setter 메서드입니다.
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	public void setStdNum(String stdNum) {
+		this.stdNum = stdNum;
+	}
+
+	public void setStdDepCd(String stdDepCd) {
+		this.stdDepCd = stdDepCd;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 }

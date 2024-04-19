@@ -31,6 +31,7 @@ public class LoginService {
 		}
 
 		// 인증 성공
-		return ResponseEntity.ok(new LoginRsltModel("00"));
+		return ResponseEntity
+				.ok(new LoginRsltModel("00", user.getStdNum(), user.getStdDepCd(), user.getName(), user.getGrade()));
 	}
 }
