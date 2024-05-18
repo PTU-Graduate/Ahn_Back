@@ -15,3 +15,4 @@ public interface RegiRepositoryDao extends JpaRepository<RegiModel, String> {
 	// 회원 ID를 기준으로 기존 등록 여부를 확인하는 메서드
 	boolean existsByMembId(String membId);
 }
+
