@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-// 엔티티를 나타내며, 데이터베이스의 stu_info 테이블에 매핑됨
+// 엔티티를 나타내며, 데이터베이스의 stu_info 테이블에 매핑됨 재경 test
 @Entity
 @Table(name = "stu_info")
 public class RegiModel {
