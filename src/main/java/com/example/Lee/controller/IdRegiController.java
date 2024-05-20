@@ -12,7 +12,7 @@ import com.example.Lee.model.CommonResponseModel; // 공통 응답 모델 클래
 import com.example.Lee.model.RegiModel; // 회원 등록 정보 모델 클래스
 import com.example.Lee.service.IdRegiService; // ID 등록 서비스 클래스
 
-@RestController // 이 클래스가 REST 컨트롤러로 동작함을 스프링에게 알림
+@RestController // 이 클래스가 REST 컨트롤러로 동작함을 스프링에게 알림,
 public class IdRegiController {
 
 	private final IdRegiService idRegiService; // 회원 등록 서비스 객체
