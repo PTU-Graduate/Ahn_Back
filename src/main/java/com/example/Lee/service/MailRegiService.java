@@ -8,16 +8,21 @@ import com.example.Lee.model.CommonResponseModel; // 클라이언트에 반환�
 import com.example.Lee.model.RegiModel; // 등록할 회원의 정보 모델
 
 @Service // 이 클래스가 서비스 계층의 컴포넌트임을 나타냄
-public class RegiService {
+public class MailRegiService {
 
 	private final RegiRepositoryDao regiRepository; // 회원 정보에 접근하기 위한 레포지토리 객체
 
 	@Autowired // 스프링이 자동으로 해당 타입의 빈(Bean)을 주입
-	public RegiService(RegiRepositoryDao regiRepository) {
+	public MailRegiService(RegiRepositoryDao regiRepository) {
 		this.regiRepository = regiRepository; // 생성자를 통해 주입받은 레포지토리 객체를 필드에 할당
 	}
 
-	public CommonResponseModel registerUser(RegiModel regiData) {
+	public CommonResponseModel mailRegister(RegiModel regiData) {
+		// 이메일이 이미 등록되어 있는지 확인
+		if (regiRepository.existsByStdNum(regiData.getStdNum())) {
+			return new CommonResponseModel("03"); // 메일이 중복인 경우 응답 코드 "03" 반환
+		}
+		// 위 중복 검사를 통과하면 회원 정보를 데이터베이스에 저장
 		regiRepository.save(regiData);
 		// 회원 등록 성공 시 응답 코드 "00" 반환
 		return new CommonResponseModel("00");
