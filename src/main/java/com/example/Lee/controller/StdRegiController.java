@@ -28,9 +28,9 @@ public class StdRegiController {
 		RegiModel regiData = new RegiModel();
 		// 요청 데이터에서 회원 정보를 추출하여 RegiModel 객체에 설정
 		regiData.setStdNum(requestData.get("STD_NUM"));
-		
+
 		// 서비스를 호출하여 학번 등록 처리 후 결과를 받음
-		CommonResponseModel result = stdRegiService.registerStd(regiData);
+		CommonResponseModel result = stdRegiService.registerStd(regiData.getStdNum());
 
 		// 결과를 ResponseEntity로 감싸 클라이언트에 반환
 		return ResponseEntity.ok(result);

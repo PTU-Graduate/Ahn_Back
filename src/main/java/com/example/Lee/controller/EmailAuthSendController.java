@@ -31,5 +31,6 @@ public class EmailAuthSendController {
 		String membId = request.get("MEMB_ID"); // 요청 본문에서 MEMB_ID를 추출
 		String code = request.get("CRE_CODE"); // 요청 본문에서 CRE_CODE를 추출
 		return emailAuthService.verifyCode(membId, code); // 인증 코드 검증 서비스 호출
+
 	}
 }
