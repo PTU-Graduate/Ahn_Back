@@ -30,7 +30,6 @@ public class RegiController {
 		regiData.setPass(requestData.get("PASS"));
 		regiData.setStdDepCd(requestData.get("STD_DEP_CD"));
 		regiData.setName(requestData.get("NAME"));
-		regiData.setGrade(requestData.get("GRADE"));
 		regiData.setEmail(requestData.get("EMAIL"));
 
 		// 서비스를 호출하여 회원 등록 처리 후 결과를 받음
