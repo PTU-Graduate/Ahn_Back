@@ -22,22 +22,19 @@ public class RegiModel {
 	private String pass; // 패스워드
 	private String stdDepCd; // 학과 코드
 	private String name; // 이름
-	private String grade; // 학년
 
 	// 기본 생성자: JPA에서 엔티티 클래스는 기본 생성자를 가지고 있어야 함
 	public RegiModel() {
 	}
 
 	// 모든 속성을 포함하는 생성자
-	public RegiModel(String membId, String stdNum, String email, String pass, String stdDepCd, String name,
-			String grade) {
+	public RegiModel(String membId, String stdNum, String email, String pass, String stdDepCd, String name) {
 		this.membId = membId;
 		this.stdNum = stdNum;
 		this.email = email;
 		this.pass = pass;
 		this.stdDepCd = stdDepCd;
 		this.name = name;
-		this.grade = grade;
 	}
 
 	// Getter and Setter 메서드: 엔티티의 속성에 접근하기 위한 메서드
@@ -87,13 +84,5 @@ public class RegiModel {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
 	}
 }
