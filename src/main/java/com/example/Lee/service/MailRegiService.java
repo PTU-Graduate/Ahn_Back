@@ -16,15 +16,15 @@ public class MailRegiService {
 	public MailRegiService(RegiRepositoryDao regiRepository) {
 		this.regiRepository = regiRepository; // 생성자를 통해 주입받은 레포지토리 객체를 필드에 할당
 	}
-
+	// 메일을 인자로 받아 중복여부를 확인하는 메서드
 	public CommonResponseModel mailRegister(RegiModel regiData) {
 		// 이메일이 이미 등록되어 있는지 확인
-		if (regiRepository.existsByStdNum(regiData.getStdNum())) {
+		if (regiRepository.existsByEmail(regiData.getEmail())) {
 			return new CommonResponseModel("03"); // 메일이 중복인 경우 응답 코드 "03" 반환
 		}
-		// 위 중복 검사를 통과하면 회원 정보를 데이터베이스에 저장
-		regiRepository.save(regiData);
-		// 회원 등록 성공 시 응답 코드 "00" 반환
+		// 위 중복 검사를 통과하면 메일 정보를 데이터베이스에 저장
+		regiRepository.saveEmail(regiData.getEmail());
+		// 이메일 등록 성공 시 응답 코드 "00" 반환
 		return new CommonResponseModel("00");
 	}
 }

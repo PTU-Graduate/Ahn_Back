@@ -23,6 +23,7 @@ public class IdRegiService {
 			return new CommonResponseModel("01"); // ID가 중복인 경우 응답 코드 "01" 반환
 		}
 		// 위 중복 검사를 통과하면 회원 정보를 데이터베이스에 저장
+		regiRepository.saveMembId(regiData.getMembId());
 		// ID 등록 성공 시 응답 코드 "00" 반환
 		return new CommonResponseModel("00");
 	}

@@ -30,7 +30,7 @@ public class StdRegiController {
 		regiData.setStdNum(requestData.get("STD_NUM"));
 
 		// 서비스를 호출하여 학번 등록 처리 후 결과를 받음
-		CommonResponseModel result = stdRegiService.registerStd(regiData.getStdNum());
+		CommonResponseModel result = stdRegiService.registerStd(regiData);
 
 		// 결과를 ResponseEntity로 감싸 클라이언트에 반환
 		return ResponseEntity.ok(result);
