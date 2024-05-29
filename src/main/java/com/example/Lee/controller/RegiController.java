@@ -27,6 +27,7 @@ public class RegiController {
 		// 회원 정보를 담는 RegiModel 객체 생성
 		RegiModel regiData = new RegiModel();
 		// 요청 데이터에서 회원 정보를 추출하여 RegiModel 객체에 설정
+		regiData.setMembId(requestData.get("MEMB_ID"));
 		regiData.setPass(requestData.get("PASS"));
 		regiData.setStdDepCd(requestData.get("STD_DEP_CD"));
 		regiData.setName(requestData.get("NAME"));
