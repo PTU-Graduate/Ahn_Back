@@ -18,15 +18,8 @@ public class RegiService {
 	}
 
 	public CommonResponseModel registerUser(RegiModel regiData) {
-		if(regiRepository.existsByMembId(regiData.getMembId())) {
-			return new CommonResponseModel("01"); // ID가 중복인 경우 응답 코드 "01" 반환
-		}
-		else if(regiRepository.existsByEmail(regiData.getEmail())) {
-			return new CommonResponseModel("02"); // ID가 중복인 경우 응답 코드 "01" 반환
-		}
-		// 회원 등록 성공 시 응답 코드 "00" 반환
 		regiRepository.save(regiData);
+		// 회원 등록 성공 시 응답 코드 "00" 반환
 		return new CommonResponseModel("00");
-		
 	}
 }
