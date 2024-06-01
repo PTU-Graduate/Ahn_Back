@@ -35,6 +35,6 @@ public class LoginService {
 		// 인증 성공
 		// 사용자의 학번, 학과 코드, 이름, 등급 등을 포함한 성공 결과 모델을 반환
 		return ResponseEntity
-				.ok(new LoginRsltModel("00", user.getStdNum(), user.getStdDepCd(), user.getName(), user.getGrade()));
+				.ok(new LoginRsltModel("00", user.getStdNum(), user.getStdDepCd(), user.getName()));
 	}
 }
