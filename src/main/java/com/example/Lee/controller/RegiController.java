@@ -36,20 +36,22 @@ public class RegiController {
 	}
 	
 	// 세션에 속성 값을 설정함
+	// * 서비스 계층으로 이동 
     private void setSessionAttribute(String name, Object value) {
         RequestContextHolder.currentRequestAttributes().setAttribute(name, value, RequestAttributes.SCOPE_SESSION);
     }
 
     // 세션에서 속성 값을 가져옴
+    // * 서비스 계층으로 이동
     private Object getSessionAttribute(String name) {
         return RequestContextHolder.currentRequestAttributes().getAttribute(name, RequestAttributes.SCOPE_SESSION);
     }
 
     // 전부다 사용한 세션을 제거
+    // * 서비스 계층으로 이동
     private void removeSessionAttribute(String name) {
         RequestContextHolder.currentRequestAttributes().removeAttribute(name, RequestAttributes.SCOPE_SESSION);
     }
-
     @PostMapping("/ID") // ID 등록 엔드포인트
     public ResponseEntity<CommonResponseModel> registerId(@RequestBody Map<String, String> requestData) {
         RegiModel regiData = new RegiModel();

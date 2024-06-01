@@ -19,11 +19,10 @@ public class MailRegiService {
 
 	public CommonResponseModel mailRegister(RegiModel regiData) {
 		// 이메일이 이미 등록되어 있는지 확인
-		if (regiRepository.existsByStdNum(regiData.getStdNum())) {
+		if (regiRepository.existsByStdNum(regiData.getEmail())) {
 			return new CommonResponseModel("03"); // 메일이 중복인 경우 응답 코드 "03" 반환
 		}
 		// 위 중복 검사를 통과하면 회원 정보를 데이터베이스에 저장
-		regiRepository.save(regiData);
 		// 회원 등록 성공 시 응답 코드 "00" 반환
 		return new CommonResponseModel("00");
 	}
