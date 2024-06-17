@@ -17,6 +17,8 @@ import com.example.Lee.service.RegiService; // 회원 등록 서비스 클래스
 import com.example.Lee.service.IdRegiService; // ID 등록 서비스 클래스
 import com.example.Lee.service.StdRegiService; // 학번 등록 서비스 클래스
 import com.example.Lee.service.MailRegiService; // Mail 등록 서비스 클래스
+import com.example.Lee.model.BasicUserDataSave;
+
 
 @RestController // 이 클래스가 REST 컨트롤러로 동작함을 스프링에게 알림
 @RequestMapping("/PTU/Register") // "/PTU/Register" 경로로 들어오는 요청을 이컨트롤러로
@@ -99,6 +101,23 @@ public class RegiController {
         // 세션에 EMAIL 저장
         setSessionAttribute("EMAIL", requestData.get("EMAIL"));
         return ResponseEntity.ok(mailResult);
+    }
+    
+    @PostMapping("/basic-info-save")
+    public ResponseEntity<BasicUserDataSave> registerBasicInfo(@RequestBody Map<String, String> requestData) {
+    	
+    	String membId = (String) getSessionAttribute("MEMB_ID");
+        String stdNum = (String) getSessionAttribute("STD_NUM");
+    	
+        RegiModel regiData = new RegiModel();
+        regiData.setMembId(membId);
+        regiData.setStdNum(stdNum);
+        regiData.setStdDepCd(requestData.get("STD_DEP_CD"));
+        regiData.setName(requestData.get("NAME"));
+
+        // 기본 정보와 SALT를 저장하고 결과 반환
+        BasicUserDataSave result = regiService.basicRegiUserData(regiData);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/StdInfo") // 전체 정보 등록 엔드포인트
