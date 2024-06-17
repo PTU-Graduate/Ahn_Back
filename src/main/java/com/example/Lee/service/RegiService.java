@@ -22,24 +22,9 @@ public class RegiService {
 	public RegiService(RegiRepositoryDao regiRepository) {
 		this.regiRepository = regiRepository; // 생성자를 통해 주입받은 레포지토리 객체를 필드에 할당
 	}
-
-	public CommonResponseModel registerUser(RegiModel regiData) {
-		if(regiRepository.existsByMembId(regiData.getMembId())) {
-			return new CommonResponseModel("01"); // ID가 중복인 경우 응답 코드 "01" 반환
-		}
-		else if(regiRepository.existsByEmail(regiData.getEmail())) {
-			return new CommonResponseModel("02"); // ID가 중복인 경우 응답 코드 "01" 반환
-		}
-		// 회원 등록 성공 시 응답 코드 "00" 반환
-		regiRepository.save(regiData);
-		return new CommonResponseModel("00");
-		
-	}
 	public BasicUserDataSave basicRegiUserData(RegiModel regiData) {
 		if (regiRepository.existsByMembId(regiData.getMembId())) {
             return new BasicUserDataSave("01",null,null); // ID가 중복인 경우 응답 코드 "01" 반환
-        } else if (regiRepository.existsByEmail(regiData.getEmail())) {
-            return new BasicUserDataSave("02",null,null); // 이메일이 중복인 경우 응답 코드 "02" 반환
         }
 		byte[] saltBytes = new byte[16];
 		random.nextBytes(saltBytes);
@@ -54,4 +39,23 @@ public class RegiService {
 	        response.setMEMB_ID(regiData.getMembId());
 	        return response;
 	}
+    public CommonResponseModel completeRegistration(RegiModel regiData) {
+        // 기본 정보가 존재하는지 확인
+        RegiModel existingData = regiRepository.findByMembId(regiData.getMembId());
+        if (existingData == null) {
+        	return new CommonResponseModel("03"); // 기본 정보가 존재하지 않는 경우 응답 코드 "03" 반환
+        }
+
+        // 추가 정보를 업데이트
+        existingData.setEmail(regiData.getEmail());
+        existingData.setPass(regiData.getPass());
+        existingData.setStdDepCd(regiData.getStdDepCd());
+        existingData.setName(regiData.getName());
+
+        // 최종 정보 업데이트
+        regiRepository.save(existingData);
+
+        return new CommonResponseModel("00"); // 성공 시 응답 코드 "00" 반환
+    }
+
 }

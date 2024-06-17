@@ -136,14 +136,14 @@ public class RegiController {
         regiData.setName(requestData.get("NAME"));
 
         // 회원 정보 저장
-        CommonResponseModel result = regiService.registerUser(regiData);
+        CommonResponseModel result = regiService.completeRegistration(regiData);
 
         // 다 사용한 세션 삭제
         removeSessionAttribute("MEMB_ID");
         removeSessionAttribute("STD_NUM");
         removeSessionAttribute("EMAIL");
-        
-        //리스트 반환
+
+        // 리스트 반환
         return ResponseEntity.ok(result);
     }
 }
